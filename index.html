@@ -4,17 +4,14 @@
     <title>Todo App</title>
     <link rel="stylesheet" type="text/css" href="lib/node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 </head>
 
 <body ng-app="TodoApp">
   <!-- TODO: Add a controller for our todo list -->
   <div>
-    <div class="row">
-      <div class="col-xs-6 col-xs-offset-3">
-        <!-- Let's call a js function from our HTML. wat? -->
-        <button class="col-xs-6 btn btn-success">New Item</button>
-        <button class="col-xs-6 btn btn-info"> All Items</button>
-      </div>
+    <div ng-include="'partials/nav-bar.html'"></div>
+    
     </div>
     <div class="row">
       <div class="col-xs-10 col-xs-offset-1 main-container">
@@ -29,5 +26,17 @@
   <script type="text/javascript" src="lib/node_modules/angular/angular.min.js"></script>
   <script type="text/javascript" src="lib/node_modules/angular-route/angular-route.min.js"></script>
   <script type="text/javascript" src="app/app.js"></script>
+  
+  <script type="text/javascript" src="app/factories/itemFactory.js"></script>
+  <script type="text/javascript" src="app/factories/filterFactory.js"></script>
+
+  <script type="text/javascript" src="app/controllers/NavCtrl.js"></script>
+  <script type="text/javascript" src="app/controllers/ItemListCtrl.js"></script>
+  <script type="text/javascript" src="app/controllers/ItemDetailCtrl.js"></script>
+  <script type="text/javascript" src="app/controllers/ItemNewCtrl.js"></script>
+
+
+
+
 </body>
 </html>
