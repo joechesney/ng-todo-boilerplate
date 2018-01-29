@@ -3,8 +3,14 @@
 
 angular.module("TodoApp")
 .controller("ItemDetailCtrl", function($scope, itemFactory, $routeParams){ 
-  let todoItems = itemFactory.getTodoItems();
-  // $scope.selectedItem = todoItems.find((item)=>{
-  //   return item.id === +$routeParams.id;
-  // });
+
+  itemFactory.getTodoItems()
+  .then(someData=>{
+    let todoItems = Object.values(someData.data);
+    $scope.selectedItem = todoItems.find((item)=>{
+      return item.FBid === $routeParams.id;
+    });
+  });
+  
+
 });

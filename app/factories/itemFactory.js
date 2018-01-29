@@ -6,6 +6,9 @@ angular.module("TodoApp").factory("itemFactory", function(FBUrl, $q, $http){
     return $q((resolve,reject)=>{
       $http.get(`${FBUrl}/items.json`)
       .then(data=>{
+        Object.keys(data.data).map(key => {
+          data.data[key].FBid = key;
+        });
         resolve(data);
       });
     });
@@ -16,7 +19,6 @@ angular.module("TodoApp").factory("itemFactory", function(FBUrl, $q, $http){
       $http.post(`${FBUrl}/items.json`,
       JSON.stringify(todoItem)
       ).then( data =>{
-        console.log('todoItem',todoItem);
         resolve(todoItem);
       }).catch(err=>{
         console.log('err',err);
@@ -29,7 +31,6 @@ angular.module("TodoApp").factory("itemFactory", function(FBUrl, $q, $http){
     return $q((resolve, reject)=>{
       $http.delete(`${FBUrl}/items/${itemKey}.json`)
       .then(response=>{
-        console.log('response',response);
         resolve(response);
       });
     });
