@@ -1,7 +1,7 @@
 "use strict";
 
 angular.module("TodoApp")
-.controller("ItemEditCtrl", function($scope, $routeParams, itemFactory){
+.controller("ItemEditCtrl", function($scope, $routeParams, itemFactory, $location){
 
   itemFactory.getTodoItems()
   .then(({data})=>{
@@ -13,6 +13,7 @@ angular.module("TodoApp")
     itemFactory.updateItem($scope.todoItem)
     .then(data=>{
       console.log('dataaftersave',data);
+      $location.url(`/items/deets/${$scope.todoItem.FBid}`);
     });
   };
 
