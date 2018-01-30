@@ -36,5 +36,16 @@ angular.module("TodoApp").factory("itemFactory", function(FBUrl, $q, $http){
     });
   }
 
-  return { removeTodo, getTodoItems, addNewItem };
+  function updateIsCompletedOnFB(itemId, value){
+
+    // patch to firebase here
+    return $q((resolve, reject)=>{
+      $http.patch(`${FBUrl}/items/${itemId}.json`, JSON.stringify({"isCompleted": value}))
+      .then(response=>{
+        resolve(response);
+      });
+    });
+  }
+
+  return { removeTodo, getTodoItems, addNewItem, updateIsCompletedOnFB };
 });

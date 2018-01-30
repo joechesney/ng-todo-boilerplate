@@ -5,7 +5,7 @@
   <div ng-repeat="item in items | filter: searchTerm.searchTerm">
     <div class="panel panel-default">
       <div class="panel-body">
-        <div class="col-xs-1"><input type="checkbox" name=""/></div>
+        <div class="col-xs-1"><input type="checkbox" ng-change="updateIsCompleted(item.FBid, item.isCompleted)" ng-model="item.isCompleted" name=""/></div>
         <div class="col-xs-7">
           <a ng-href="#!/items/deets/{{item.FBid}}"> {{item.task}}</a>
         </div>

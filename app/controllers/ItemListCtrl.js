@@ -6,7 +6,6 @@ angular.module("TodoApp")
 
   itemFactory.getTodoItems()
   .then((data)=>{
-    console.log('data.data',data.data);
     $scope.items = Object.keys(data.data).map(key => {
       data.data[key].FBid = key;
       return data.data[key];
@@ -25,6 +24,13 @@ angular.module("TodoApp")
         });
         $location.url("/items/list");
       });
+    });
+  };
+
+  $scope.updateIsCompleted = function(FBid, value){
+    itemFactory.updateIsCompletedOnFB(FBid, value)
+    .then(response=>{
+      // console.log('response888',response);
     });
   };
 });
