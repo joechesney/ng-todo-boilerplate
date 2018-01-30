@@ -13,6 +13,10 @@ angular.module("TodoApp", ["ngRoute"])
     templateUrl:"partials/item-new.html",
     controller:"ItemNewCtrl"
   })
+  .when("/items/deets/:id/edit", {
+    templateUrl:"partials/item-new.html",
+    controller:"ItemEditCtrl"
+  })
   .when("/items/deets/:id", {
     templateUrl:"partials/item-details.html",
     controller:"ItemDetailCtrl"

@@ -23,7 +23,6 @@ angular.module("TodoApp").factory("itemFactory", function(FBUrl, $q, $http){
       }).catch(err=>{
         console.log('err',err);
       });
-
     });
   }
 
@@ -37,8 +36,6 @@ angular.module("TodoApp").factory("itemFactory", function(FBUrl, $q, $http){
   }
 
   function updateIsCompletedOnFB(itemId, value){
-
-    // patch to firebase here
     return $q((resolve, reject)=>{
       $http.patch(`${FBUrl}/items/${itemId}.json`, JSON.stringify({"isCompleted": value}))
       .then(response=>{
@@ -47,5 +44,15 @@ angular.module("TodoApp").factory("itemFactory", function(FBUrl, $q, $http){
     });
   }
 
-  return { removeTodo, getTodoItems, addNewItem, updateIsCompletedOnFB };
+  function updateItem(item){
+    console.log('topof update',item);
+    return $q((resolve, reject)=>{
+      $http.put(`${FBUrl}/items/${item.FBid}.json`, JSON.stringify(item))
+      .then(response=>{
+        resolve(response);
+      });
+    });
+  }
+
+  return { removeTodo, getTodoItems, addNewItem, updateIsCompletedOnFB, updateItem };
 });

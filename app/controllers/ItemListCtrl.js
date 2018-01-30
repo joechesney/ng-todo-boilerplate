@@ -6,10 +6,13 @@ angular.module("TodoApp")
 
   itemFactory.getTodoItems()
   .then((data)=>{
+    console.log('data.data',data.data);
     $scope.items = Object.keys(data.data).map(key => {
+      console.log('key',key);
       data.data[key].FBid = key;
       return data.data[key];
     });
+    console.log('scopeitems',  $scope.items);
   });
 
   $scope.removeItem= function(){
