@@ -3,7 +3,7 @@
 
 angular.module("TodoApp")
 .controller("ItemNewCtrl", function($scope, $location, itemFactory){
-  let newTask =  {
+  let todoItem =  {
     id: 0,
     task: "",
     isCompleted: false,
@@ -14,8 +14,8 @@ angular.module("TodoApp")
     dependencies: ""
   };
 
-  $scope.addNewTask = () =>{
-    itemFactory.addNewItem($scope.newTask)
+  $scope.saveItem = () =>{
+    itemFactory.addNewItem($scope.todoItem)
     .then(data=>{
       itemFactory.getTodoItems()
       .then(allItems=>{
@@ -23,4 +23,6 @@ angular.module("TodoApp")
       });
     });
   };
+
+  $scope.title = "Edit";
 });

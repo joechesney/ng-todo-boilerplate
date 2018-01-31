@@ -5,6 +5,10 @@ angular.module("TodoApp", ["ngRoute"])
 .config(($routeProvider)=>{
   // TODO: add routing
   $routeProvider
+  .when("/login", {
+    templateUrl:"partials/user-form.html",
+    controller:"LoginCtrl"
+  })
   .when("/items/list", {
     templateUrl:"partials/item-list.html",
     controller:"ItemListCtrl"
@@ -12,6 +16,10 @@ angular.module("TodoApp", ["ngRoute"])
   .when("/items/new", {
     templateUrl:"partials/item-new.html",
     controller:"ItemNewCtrl"
+  })
+  .when("/items/deets/:id/edit", {
+    templateUrl:"partials/item-new.html",
+    controller:"ItemEditCtrl"
   })
   .when("/items/deets/:id", {
     templateUrl:"partials/item-details.html",
