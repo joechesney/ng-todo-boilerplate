@@ -13,7 +13,7 @@ let isAuth = (authFactory) =>{
       }
     });
   });
-}
+};
 
 angular.module("TodoApp", ["ngRoute"])
 .constant("FBUrl", "https://testetization.firebaseio.com/todos")
@@ -26,21 +26,25 @@ angular.module("TodoApp", ["ngRoute"])
   })
   .when("/items/list", {
     templateUrl:"partials/item-list.html",
-    controller:"ItemListCtrl"
+    controller:"ItemListCtrl",
+    resolve: { isAuth }
   })
   .when("/items/new", {
     templateUrl:"partials/item-new.html",
-    controller:"ItemNewCtrl"
+    controller:"ItemNewCtrl",
+    resolve: { isAuth }
   })
   .when("/items/deets/:id/edit", {
     templateUrl:"partials/item-new.html",
-    controller:"ItemEditCtrl"
+    controller:"ItemEditCtrl",
+    resolve: { isAuth }
   })
   .when("/items/deets/:id", {
     templateUrl:"partials/item-details.html",
-    controller:"ItemDetailCtrl"
+    controller:"ItemDetailCtrl",
+    resolve: { isAuth }
   })
-  .otherwise("/items/list");
+  .otherwise("/login");
 })
 .run(FBCreds =>{
   let creds = FBCreds;

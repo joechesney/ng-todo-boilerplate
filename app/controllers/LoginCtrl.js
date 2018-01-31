@@ -4,9 +4,6 @@ angular.module("TodoApp")
 .controller("LoginCtrl", function($scope, authFactory, $window){
 
   $scope.test = "hello";
-
-  $scope.login = () =>{
-  };
   
   $scope.register = () =>{
     authFactory.createUser($scope.account)

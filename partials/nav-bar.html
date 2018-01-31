@@ -30,7 +30,7 @@
         <ul class="nav navbar-nav navbar-right" >
           <li ng-repeat="item in navItems">
             <!-- <a id="{{item.name}}" href="{{item.url}}">{{item.name}}</a> -->
-            <a ng-show="{{bang}}$root.isLoggedIn" href={{item.url}}>{{item.name}}</a>
+            <a ng-show="{{item.bang}}isLoggedIn" ng-click="navigate(item.url)">{{item.name}}</a>
           </li>
         </ul>
       <!-- </div>/.navbar-collapse -->
