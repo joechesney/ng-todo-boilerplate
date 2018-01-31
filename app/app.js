@@ -1,5 +1,20 @@
 "use strict";
 
+let isAuth = (authFactory) =>{
+  new Promise((resolve, reject)=>{
+    authFactory.isAuthenticated().then(userBoolean =>{
+      console.log('user',userBoolean);
+      if(userBoolean){
+        console.log('user logged in',userBoolean);
+        resolve();
+      }else{
+        console.log('Not Authenticated',userBoolean);
+        reject();
+      }
+    });
+  });
+}
+
 angular.module("TodoApp", ["ngRoute"])
 .constant("FBUrl", "https://testetization.firebaseio.com/todos")
 .config(($routeProvider)=>{
@@ -26,6 +41,14 @@ angular.module("TodoApp", ["ngRoute"])
     controller:"ItemDetailCtrl"
   })
   .otherwise("/items/list");
+})
+.run(FBCreds =>{
+  let creds = FBCreds;
+  let authConfig = {
+    apiKey: creds.apiKey,
+    authDomain: creds.authDomain
+  };
+    firebase.initializeApp(authConfig);
 });
 
 

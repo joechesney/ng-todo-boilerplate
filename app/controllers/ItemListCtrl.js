@@ -5,13 +5,16 @@ angular.module("TodoApp")
   $scope.searchTerm = filterFactory;
 
   itemFactory.getTodoItems()
-  .then((data)=>{
-    console.log('data.data',data.data);
-    $scope.items = Object.keys(data.data).map(key => {
-      console.log('key',key);
-      data.data[key].FBid = key;
-      return data.data[key];
-    });
+  .then(({data})=>{
+    console.log('dataaaa',data);
+    if(data !== null && data !== undefined){
+      $scope.items = Object.keys(data).map(key => {
+        data[key].FBid = key;
+        return data[key];
+      });
+    }else{
+      $scope.message = "You need some tasks, my dude.";
+    }
     console.log('scopeitems',  $scope.items);
   });
 
