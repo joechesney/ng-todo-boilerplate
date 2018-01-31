@@ -1,6 +1,7 @@
 "use strict";
 
-angular.module("TodoApp").controller("NavCtrl", function($scope, $location, filterFactory){
+angular.module("TodoApp")
+.controller("NavCtrl", function($scope, $location, filterFactory, $window, authFactory){
 
   $scope.searchTerm = filterFactory;
 
@@ -15,7 +16,8 @@ angular.module("TodoApp").controller("NavCtrl", function($scope, $location, filt
     },
     {
       name:"Login",
-      url:"#!/login"
+      url:"#!/login",
+      bang: "!"
     },
     {
       name:"All Items",
@@ -26,6 +28,27 @@ angular.module("TodoApp").controller("NavCtrl", function($scope, $location, filt
       url:"#!/items/new"
     }
   ]; 
+ // need some more stuff here
+  firebase.auth().onAuthStateChanged(function(user){
+    if(user) {
+      $scope.isLoggin = true;
+      $scope.$apply();
+    } else {
+      $scope.isLoggedIn = false;
+      $scope.$apply();
+      $window.location.href = "#!/login";
+    }
+  });
 
 
+  $scope.navigate = navUrl =>{
+    console.log('navUrl',navUrl);
+    if(navUrl === "#!/logout"){
+      authFactory.logoutUser();
+    } else {
+      $window.location.href = navUrl;
+    }
+  };
+
+  
 });

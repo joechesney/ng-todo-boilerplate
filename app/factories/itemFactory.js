@@ -4,7 +4,7 @@ angular.module("TodoApp").factory("itemFactory", function(FBUrl, $q, $http){
   
   function getTodoItems(){
     return $q((resolve,reject)=>{
-      $http.get(`${FBUrl}/items.json`)
+      $http.get(`${FBUrl}/items.json?orderBy="uid"&equalTo="${firebase.auth().currentUser.uid}"`)
       .then(data=>{
         Object.keys(data.data).map(key => {
           data.data[key].FBid = key;
@@ -27,6 +27,8 @@ angular.module("TodoApp").factory("itemFactory", function(FBUrl, $q, $http){
   }
 
   function removeTodo(itemKey){
+    // double check that the fb id exists. 
+    // if it doesnt exist, it will delete entire database
     return $q((resolve, reject)=>{
       $http.delete(`${FBUrl}/items/${itemKey}.json`)
       .then(response=>{
